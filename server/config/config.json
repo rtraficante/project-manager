@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "ryantraficante",
+    "password": null,
+    "database": "bug_tracker",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "ryantraficante",
+    "password": null,
+    "database": "bug_tracker",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "ryantraficante",
+    "password": null,
+    "database": "bug_tracker",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
