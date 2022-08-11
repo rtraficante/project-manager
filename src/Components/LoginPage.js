@@ -1,10 +1,8 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import React, { useRef } from "react";
 
 function LoginPage() {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { loginWithRedirect } = useAuth0();
 
   const handleSubmit = () => {};
 
@@ -13,7 +11,7 @@ function LoginPage() {
       <form>
         <input ref={emailRef} name="email" placeholder="email" />
         <input ref={passwordRef} name="password" placeholder="password" />
-        <button onClick={() => loginWithRedirect()}>Login</button>
+        <button>Login</button>
       </form>
     </div>
   );

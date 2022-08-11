@@ -14,6 +14,16 @@ module.exports = gql`
     name: String
   }
 
+  type FieldError {
+    field: String
+    message: String
+  }
+
+  type UserResponse {
+    errors: [FieldError]
+    user: User
+  }
+
   type Query {
     allUsers: [User!]!
     getUser(id: Int!): User!
@@ -22,12 +32,13 @@ module.exports = gql`
   }
 
   type Mutation {
-    createUser(
+    register(
       firstName: String
       lastName: String
       email: String!
       password: String!
-    ): User!
+    ): UserResponse!
+    login(email: String!, password: String!): UserResponse!
 
     createProject(name: String!, userId: Int!): Project!
   }
