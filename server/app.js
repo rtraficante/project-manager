@@ -5,7 +5,6 @@ const { ApolloServer } = require("apollo-server-express");
 const resolvers = require("./graphql/resolvers");
 const typeDefs = require("./graphql/typeDefs");
 const models = require("./models");
-const cors = require("cors");
 
 const app = express();
 const PORT = 4000;

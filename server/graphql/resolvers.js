@@ -1,3 +1,5 @@
+const bcrypt = require("bcryptjs");
+
 module.exports = {
   Query: {
     allUsers: (root, args, { models }) => {
@@ -18,8 +20,17 @@ module.exports = {
     },
   },
   Mutation: {
-    createUser: (parent, args, { models }) => {
-      return models.User.create(args);
+    createUser: async (parent, args, { models }) => {
+      const { firstName, lastName, email, password } = args;
+
+      const hash = await bcrypt.hash(password, 5);
+
+      return models.User.create({
+        firstName,
+        lastName,
+        email,
+        password: hash,
+      });
     },
     createProject: (parent, args, { models }) => {
       try {
