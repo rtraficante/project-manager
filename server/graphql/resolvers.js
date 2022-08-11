@@ -18,6 +18,14 @@ module.exports = {
     getProject: (root, { id }, { models }) => {
       return models.Project.findByPk(id);
     },
+    me: async (parent, args, { models, req }) => {
+      // you are not logged in
+      if (!req.session.userId) {
+        return null;
+      }
+      const user = await models.User.findByPk(req.session.userId);
+      return user;
+    },
   },
   Mutation: {
     register: async (
@@ -56,7 +64,6 @@ module.exports = {
           firstName,
           lastName,
         });
-        console.log(user);
       } catch (err) {
         if (err.original.detail.includes("already exists")) {
           // duplicate email
@@ -70,6 +77,8 @@ module.exports = {
           };
         }
       }
+
+      req.session.userId = user.id;
       return {
         user,
       };

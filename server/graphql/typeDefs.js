@@ -29,6 +29,7 @@ module.exports = gql`
     getUser(id: Int!): User!
     allProjects: [Project!]
     getProject(id: Int!): Project!
+    me: User
   }
 
   type Mutation {
