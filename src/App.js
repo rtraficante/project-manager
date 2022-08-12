@@ -3,7 +3,7 @@ import LoginPage from "./Components/LoginPage";
 
 function App() {
   return (
-    <div>
+    <div className="w-full h-[100%]">
       <Router>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
