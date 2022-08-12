@@ -12,11 +12,16 @@ module.exports = {
         include: [{ model: models.Project, as: "project" }],
       });
     },
-    allProjects: (root, args, { models }) => {
-      return models.Project.findAll();
-    },
     getProject: (root, { id }, { models }) => {
       return models.Project.findByPk(id);
+    },
+    getProjectsByUserId: async (root, { userId }, { models }) => {
+      const projects = await models.Project.findAll({
+        where: {
+          userId,
+        },
+      });
+      return projects;
     },
     me: async (parent, args, { models, req }) => {
       // you are not logged in
@@ -116,6 +121,21 @@ module.exports = {
 
       return { user };
     },
+    logout: async (parents, args, { req, res }) => {
+      return new Promise((resolve) => {
+        return req.session.destroy((err) => {
+          if (err) {
+            console.log(err);
+            resolve(false);
+            return false;
+          }
+          res.clearCookie("qid");
+          resolve(true);
+          return true;
+        });
+      });
+    },
+
     createProject: (parent, args, { models }) => {
       try {
         return models.Project.create(args);

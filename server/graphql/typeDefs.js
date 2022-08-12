@@ -27,9 +27,9 @@ module.exports = gql`
   type Query {
     allUsers: [User!]!
     getUser(id: Int!): User!
-    allProjects: [Project!]
     getProject(id: Int!): Project!
     me: User
+    getProjectsByUserId(userId: Int!): [Project]
   }
 
   type Mutation {
@@ -39,7 +39,10 @@ module.exports = gql`
       email: String!
       password: String!
     ): UserResponse!
+
     login(email: String!, password: String!): UserResponse!
+
+    logout: Boolean!
 
     createProject(name: String!, userId: Int!): Project!
   }

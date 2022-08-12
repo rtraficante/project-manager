@@ -1,10 +1,12 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./Components/Home";
 import LoginPage from "./Components/LoginPage";
+import Navbar from "./Components/Navbar";
 
 function App() {
   return (
     <div className="w-full h-[100%]">
+      
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />

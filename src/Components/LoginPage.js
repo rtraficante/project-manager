@@ -1,38 +1,10 @@
 import React, { useRef, useState } from "react";
 import { gql, useMutation } from "@apollo/client";
-import { Link } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
-
-const LOGIN = gql`
-  mutation Login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      errors {
-        field
-        message
-      }
-      user {
-        id
-        email
-      }
-    }
-  }
-`;
-
-const REGISTER = gql`
-  mutation Register($email: String!, $password: String!) {
-    register(email: $email, password: $password) {
-      errors {
-        field
-        message
-      }
-      user {
-        id
-        email
-      }
-    }
-  }
-`;
+import { useNavigate } from "react-router";
+import { client } from "../index";
+import { LOGIN, REGISTER } from "../graphql/mutations/user";
 
 function LoginPage() {
   const [loginState, setLoginState] = useState("login");
@@ -40,6 +12,7 @@ function LoginPage() {
   const [registerUser, { data: registerData }] = useMutation(REGISTER);
   const emailRef = useRef();
   const passwordRef = useRef();
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -48,7 +21,8 @@ function LoginPage() {
         email: emailRef.current.value,
         password: passwordRef.current.value,
       },
-    });
+    }).then(() => client.resetStore());
+    navigate("/");
   };
 
   const handleRegister = (e) => {
@@ -58,7 +32,8 @@ function LoginPage() {
         email: emailRef.current.value,
         password: passwordRef.current.value,
       },
-    });
+    }).then(() => client.resetStore());
+    navigate("/");
   };
 
   return (
