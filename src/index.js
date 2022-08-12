@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-import { Auth0Provider } from "@auth0/auth0-react";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
@@ -13,13 +12,7 @@ const client = new ApolloClient({
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <Auth0Provider
-    domain="dev-9udymgwn.us.auth0.com"
-    clientId="WrsvycUzylgFbHXuFyEUirBtCLpnJ4PN"
-    redirectUri="/"
-  >
-    <ApolloProvider client={client}>
-      <App />
-    </ApolloProvider>
-  </Auth0Provider>
+  <ApolloProvider client={client}>
+    <App />
+  </ApolloProvider>
 );
