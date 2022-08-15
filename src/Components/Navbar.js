@@ -3,13 +3,16 @@ import { gql, useQuery, useMutation } from "@apollo/client";
 import { client } from "../index";
 import { ME } from "../graphql/queries/user";
 import { LOGOUT } from "../graphql/mutations/user";
+import { useNavigate } from "react-router";
 
 function Navbar() {
   const { loading, data } = useQuery(ME);
   const [logoutUser] = useMutation(LOGOUT);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     logoutUser().then(() => client.resetStore());
+    navigate("/login");
   };
 
   return (
@@ -27,7 +30,7 @@ function Navbar() {
               className="hover:bg-blue-400 rounded-lg p-2"
               onClick={handleLogout}
             >
-              logout
+              Logout
             </button>
           </div>
         ) : (
