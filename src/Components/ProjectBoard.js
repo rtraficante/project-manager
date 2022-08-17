@@ -1,12 +1,16 @@
 import { useQuery } from "@apollo/client";
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { GET_PROJECT } from "../graphql/queries/project";
 import CreateTask from "./CreateTask";
-import Task from "./Task";
+import ProjectStatusContainer from "./ProjectStatusContainer";
+import TaskInformation from "./TaskInformation";
 
 function ProjectBoard({ user }) {
   const params = useParams();
+  const [showCreateForm, setShowCreateForm] = useState(false);
+  const [showTaskInfo, setShowTaskInfo] = useState(false);
+  const [taskShown, setTaskShown] = useState({});
 
   const { loading, data: project } = useQuery(GET_PROJECT, {
     variables: {
@@ -31,45 +35,53 @@ function ProjectBoard({ user }) {
   }
 
   return (
-    <div className="flex flex-col h-screen mt-4 mx-2 space-y-2">
-      {/* Tasks that have not been started */}
-      <div className="bg-gray-200 shadow-md p-4 flex-1 max-h-[60%]">
-        <h4 className="text-center font-bold mb-2">Not Started</h4>
-        <div className="space-y-2 rounded-md overflow-y-auto h-[90%] py-4">
-          {project?.getProject.tasks
-            .filter((task) => task.status === "Not Started")
-            .map((task) => (
-              <Task key={task.id} task={task} />
-            ))}
-        </div>
+    <>
+      <div className="m-2 my-4">
+        <button
+          className="p-2 bg-blue-600 text-white rounded-md"
+          onClick={() => setShowCreateForm(true)}
+        >
+          + Add new task
+        </button>
       </div>
+      <div className="flex h-screen mt-4 mx-2 space-x-2 justify-center overflow-x-scroll">
+        {/* Tasks that have not been started */}
+        <ProjectStatusContainer
+          project={project}
+          setTaskShown={setTaskShown}
+          setShowTaskInfo={setShowTaskInfo}
+          status={"Not Started"}
+        />
 
-      {/* Tasks that are in progress */}
-      <div className="bg-gray-200 shadow-md p-4 max-h-[60%]">
-        <h4 className="text-center font-bold mb-2">In Progress</h4>
-        <div className="space-y-2 rounded-md overflow-y-auto h-[90%] py-4">
-          {project?.getProject.tasks
-            .filter((task) => task.status === "In Progress")
-            .map((task) => (
-              <Task key={task.id} task={task} />
-            ))}
-        </div>
+        {/* Tasks that are in progress */}
+        <ProjectStatusContainer
+          project={project}
+          setShowTaskInfo={setShowTaskInfo}
+          setTaskShown={setTaskShown}
+          status={"In Progress"}
+        />
+
+        {/* Tasks that have been completed */}
+        <ProjectStatusContainer
+          project={project}
+          setShowTaskInfo={setShowTaskInfo}
+          setTaskShown={setTaskShown}
+          status={"Completed"}
+        />
+
+        {showCreateForm && (
+          <CreateTask project={project} setShowForm={setShowCreateForm} />
+        )}
+
+        {showTaskInfo && (
+          <TaskInformation
+            task={taskShown}
+            setTaskShown={setTaskShown}
+            setShowTaskInfo={setShowTaskInfo}
+          />
+        )}
       </div>
-
-      {/* Tasks that have been completed */}
-      <div className="bg-gray-200 shadow-md p-4 max-h-[60%]">
-        <h4 className="text-center font-bold mb-2">Completed</h4>
-        <div className="space-y-2 rounded-md overflow-y-auto h-[90%] py-4">
-          {project?.getProject.tasks
-            .filter((task) => task.status === "Completed")
-            .map((task) => (
-              <Task key={task.id} task={task} />
-            ))}
-        </div>
-      </div>
-
-      {/* <CreateTask project={project} /> */}
-    </div>
+    </>
   );
 }
 
