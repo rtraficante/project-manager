@@ -1,6 +1,9 @@
 const bcrypt = require("bcryptjs");
+const { dateScalar } = require("./scalars");
 
 module.exports = {
+  Date: dateScalar,
+
   Query: {
     allUsers: (root, args, { models }) => {
       return models.User.findAll({
@@ -12,13 +15,17 @@ module.exports = {
         include: [{ model: models.Project, as: "project" }],
       });
     },
-    getProject: (root, { id }, { models }) => {
-      return models.Project.findByPk(id);
+    getProject: async (root, { projectId }, { models }) => {
+      const project = await models.Project.findByPk(projectId, {
+        include: [{ model: models.Task, as: "tasks" }],
+      });
+
+      return project;
     },
-    getProjectsByUserId: async (root, { userId }, { models }) => {
+    getProjectsByUserId: async (root, args, { req, models }) => {
       const projects = await models.Project.findAll({
         where: {
-          userId,
+          userId: req.session.userId,
         },
       });
       return projects;
@@ -30,6 +37,14 @@ module.exports = {
       }
       const user = await models.User.findByPk(req.session.userId);
       return user;
+    },
+    getTasks: async (parent, { projectId }, { models }) => {
+      const tasks = await models.Task.findAll({
+        where: {
+          projectId,
+        },
+      });
+      return tasks;
     },
   },
   Mutation: {
@@ -139,6 +154,15 @@ module.exports = {
     createProject: (parent, args, { models }) => {
       try {
         return models.Project.create(args);
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    createTask: async (parent, args, { models }) => {
+      try {
+        const task = await models.Task.create(args);
+        return task;
       } catch (err) {
         console.error(err);
       }

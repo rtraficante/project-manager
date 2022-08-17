@@ -1,19 +1,11 @@
 import { useQuery } from "@apollo/client";
 import React, { useState } from "react";
-
 import { PROJECTS_BY_USER_ID } from "../graphql/queries/project";
-import { ME } from "../graphql/queries/user";
 import CreateProject from "./CreateProject";
-import Navbar from "./Navbar";
 import ProjectThumbnail from "./ProjectThumbnail";
 
-function Home() {
-  const { data: user } = useQuery(ME);
-  const { loading, data: projects } = useQuery(PROJECTS_BY_USER_ID, {
-    variables: {
-      userId: user?.me?.id || -1,
-    },
-  });
+function Home({ user }) {
+  const { loading, data: projects } = useQuery(PROJECTS_BY_USER_ID);
   const [openCreateProject, setOpenCreateProject] = useState(false);
 
   return (
@@ -25,7 +17,6 @@ function Home() {
           openCreateProject={openCreateProject}
         />
       ) : null}
-      <Navbar />
       <div className="p-8">
         {loading ? (
           <div>
@@ -39,7 +30,12 @@ function Home() {
               name={"Create a new project"}
             />
             {projects?.getProjectsByUserId.map((project) => (
-              <ProjectThumbnail key={project.id} name={project.name} />
+              <ProjectThumbnail
+                user={user}
+                key={project.id}
+                name={project.name}
+                id={project.id}
+              />
             ))}
           </div>
         )}

@@ -14,26 +14,31 @@ function LoginPage() {
   const passwordRef = useRef();
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    loginUser({
+    const response = await loginUser({
       variables: {
         email: emailRef.current.value,
         password: passwordRef.current.value,
       },
     }).then(() => client.resetStore());
-    navigate("/");
+
+    if (response[0].data.me) {
+      navigate("/");
+    }
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    registerUser({
+    const response = await registerUser({
       variables: {
         email: emailRef.current.value,
         password: passwordRef.current.value,
       },
     }).then(() => client.resetStore());
-    navigate("/");
+    if (response[0].data.me) {
+      navigate("/");
+    }
   };
 
   return (

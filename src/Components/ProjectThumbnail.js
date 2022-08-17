@@ -1,13 +1,20 @@
 import React from "react";
 import { PlusCircleIcon } from "@heroicons/react/outline";
+import { useNavigate } from "react-router";
 
-function ProjectThumbnail({ name, setOpenCreateProject, openCreateProject }) {
+function ProjectThumbnail({
+  name,
+  setOpenCreateProject,
+  openCreateProject,
+  id,
+}) {
+  const navigate = useNavigate();
   return (
     <button
       onClick={
         openCreateProject !== undefined
           ? () => setOpenCreateProject(!openCreateProject)
-          : null
+          : () => navigate(`/projects/${id}`)
       }
       className="flex items-center justify-center w-[320px] h-[200px] max-w-[400px] border border-gray-600 bg-white drop-shadow-lg rounded-lg active:opacity-70 active:bg-gray-200 hover:scale-105 transition duration-150"
     >

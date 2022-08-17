@@ -1,6 +1,8 @@
 const { gql } = require("apollo-server-express");
 
 module.exports = gql`
+  scalar Date
+
   type User {
     id: Int!
     firstName: String
@@ -12,6 +14,17 @@ module.exports = gql`
   type Project {
     id: Int!
     name: String
+    userId: Int
+    tasks: [Task]
+  }
+
+  type Task {
+    id: Int!
+    name: String!
+    description: String
+    due: Date
+    status: String!
+    projectId: Int
   }
 
   type FieldError {
@@ -27,9 +40,10 @@ module.exports = gql`
   type Query {
     allUsers: [User!]!
     getUser(id: Int!): User!
-    getProject(id: Int!): Project!
+    getProject(projectId: Int!): Project!
     me: User
-    getProjectsByUserId(userId: Int!): [Project]
+    getProjectsByUserId: [Project]
+    getTasks(projectId: Int!): [Task!]
   }
 
   type Mutation {
@@ -45,5 +59,12 @@ module.exports = gql`
     logout: Boolean!
 
     createProject(name: String!, userId: Int!): Project!
+
+    createTask(
+      name: String!
+      description: String
+      due: Date
+      projectId: Int!
+    ): Task!
   }
 `;
