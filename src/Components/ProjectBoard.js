@@ -75,6 +75,7 @@ function ProjectBoard({ user }) {
 
         {showTaskInfo && (
           <TaskInformation
+            project={project}
             task={taskShown}
             setTaskShown={setTaskShown}
             setShowTaskInfo={setShowTaskInfo}

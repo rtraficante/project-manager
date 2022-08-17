@@ -21,3 +21,8 @@ export const CREATE_TASK = gql`
   }
 `;
 
+export const EDIT_TASK_STATUS = gql`
+  mutation editTaskStatus($id: Int!, $status: String!) {
+    editTaskStatus(id: $id, status: $status)
+  }
+`;

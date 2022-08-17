@@ -167,5 +167,17 @@ module.exports = {
         console.error(err);
       }
     },
+
+    editTaskStatus: async (parent, { id, status }, { models }) => {
+      const task = await models.Task.findByPk(id);
+      const update = await task.update({
+        status,
+      });
+      if (update) {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
 };

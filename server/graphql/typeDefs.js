@@ -66,5 +66,7 @@ module.exports = gql`
       due: Date
       projectId: Int!
     ): Task!
+
+    editTaskStatus(id: Int!, status: String!): Boolean!
   }
 `;
