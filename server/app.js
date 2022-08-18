@@ -8,12 +8,13 @@ const models = require("./models");
 const {
   ApolloServerPluginLandingPageGraphQLPlayground,
 } = require("apollo-server-core");
+require("dotenv").config();
 
 const session = require("express-session");
 const RedisStore = require("connect-redis")(session);
 const redis = require("redis");
 
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 const corsOptions = {
   origin: ["http://localhost:3000", "https://studio.apollographql.com"],
@@ -35,7 +36,7 @@ app.use(
       sameSite: "lax",
     },
     saveUninitialized: false,
-    secret: "hjksdhjkfh",
+    secret: process.env.SESSION_SECRET,
     resave: false,
   })
 );

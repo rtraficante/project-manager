@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import Login from "./Login";
 import Register from "./Register";
 import { useNavigate } from "react-router";

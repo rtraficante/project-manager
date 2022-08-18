@@ -1,5 +1,5 @@
 import React from "react";
-import { gql, useQuery, useMutation } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { client } from "../index";
 import { ME } from "../graphql/queries/user";
 import { LOGOUT } from "../graphql/mutations/user";

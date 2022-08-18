@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { PencilAltIcon } from "@heroicons/react/outline";
 
 function Task({ task, setShowTaskInfo, setTaskShown }) {
