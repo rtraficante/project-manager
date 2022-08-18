@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { EDIT_TASK_STATUS } from "../graphql/mutations/task";
 import { GET_PROJECT } from "../graphql/queries/project";
 
-function EditTaskStatus({ task, project }) {
+function EditTaskStatus({ task, project, setShowTaskInfo }) {
   const [selectedOption, setSelectedOption] = useState(task.status);
 
   const [setStatus] = useMutation(EDIT_TASK_STATUS, {
@@ -27,6 +27,7 @@ function EditTaskStatus({ task, project }) {
         status: e.target.value,
       },
     });
+    setShowTaskInfo(false);
   };
 
   return (

@@ -6,7 +6,7 @@ import { LOGOUT } from "../graphql/mutations/user";
 import { useNavigate } from "react-router";
 
 function Navbar() {
-  const { loading, data } = useQuery(ME);
+  const { data } = useQuery(ME);
   const [logoutUser] = useMutation(LOGOUT);
   const navigate = useNavigate();
 
@@ -19,25 +19,19 @@ function Navbar() {
     <div className="bg-blue-600 h-14 flex justify-between px-8 items-center text-white">
       <div>
         <a className="font-bold" href="/">
-          Bug Tracker
+          Project Management
         </a>
       </div>
       <div>
-        {data?.me ? (
-          <div className="flex space-x-4 items-center">
-            <p className="font-bold">{data?.me.email}</p>
-            <button
-              className="hover:bg-blue-400 rounded-lg p-2"
-              onClick={handleLogout}
-            >
-              Logout
-            </button>
-          </div>
-        ) : (
-          <button className="hover:bg-blue-400 rounded-lg p-2">
-            <a href="/login">Login</a>
+        <div className="flex space-x-4 items-center">
+          <p className="font-bold">{data?.me.email}</p>
+          <button
+            className="hover:bg-blue-400 rounded-lg p-2"
+            onClick={handleLogout}
+          >
+            Logout
           </button>
-        )}
+        </div>
       </div>
     </div>
   );

@@ -60,6 +60,8 @@ module.exports = gql`
 
     createProject(name: String!, userId: Int!): Project!
 
+    deleteProject(id: Int!): Boolean!
+
     createTask(
       name: String!
       description: String
@@ -68,5 +70,9 @@ module.exports = gql`
     ): Task!
 
     editTaskStatus(id: Int!, status: String!): Boolean!
+
+    editTask(id: Int!, name: String, description: String, due: Date): Task!
+
+    deleteTask(id: Int!): Boolean!
   }
 `;

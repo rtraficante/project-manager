@@ -1,12 +1,20 @@
 import { useQuery } from "@apollo/client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import { PROJECTS_BY_USER_ID } from "../graphql/queries/project";
 import CreateProject from "./CreateProject";
 import ProjectThumbnail from "./ProjectThumbnail";
 
-function Home({ user }) {
+function Home({ user, userLoading }) {
+  const navigate = useNavigate();
   const { loading, data: projects } = useQuery(PROJECTS_BY_USER_ID);
   const [openCreateProject, setOpenCreateProject] = useState(false);
+
+  useEffect(() => {
+    if (!user?.me && !userLoading) {
+      navigate("/login");
+    }
+  }, [navigate, user?.me, userLoading]);
 
   return (
     <div>
@@ -17,13 +25,14 @@ function Home({ user }) {
           openCreateProject={openCreateProject}
         />
       ) : null}
-      <div className="p-8">
+      <div className="p-8 max-w-[1200px] mx-auto flex flex-col items-center md:inline-block">
+        <h2 className="text-4xl mb-4">My Projects</h2>
         {loading ? (
           <div>
             <p className="text-center text-xl">Loading...</p>
           </div>
         ) : (
-          <div className="flex flex-col items-center md:justify-start md:flex-row space-y-4 md:space-y-0 md:space-x-4 md:flex-wrap">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             <ProjectThumbnail
               setOpenCreateProject={setOpenCreateProject}
               openCreateProject={openCreateProject}

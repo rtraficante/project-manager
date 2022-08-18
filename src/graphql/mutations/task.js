@@ -26,3 +26,25 @@ export const EDIT_TASK_STATUS = gql`
     editTaskStatus(id: $id, status: $status)
   }
 `;
+
+export const EDIT_TASK = gql`
+  mutation editTask(
+    $id: Int!
+    $name: String
+    $description: String
+    $due: Date
+  ) {
+    editTask(id: $id, name: $name, description: $description, due: $due) {
+      id
+      name
+      description
+      due
+    }
+  }
+`;
+
+export const DELETE_TASK = gql`
+  mutation deleteTask($id: Int!) {
+    deleteTask(id: $id)
+  }
+`;

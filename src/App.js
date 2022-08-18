@@ -7,18 +7,21 @@ import ProjectBoard from "./Components/ProjectBoard";
 import { ME } from "./graphql/queries/user";
 
 function App() {
-  const { data: user } = useQuery(ME);
+  const { data: user, loading } = useQuery(ME);
 
   return (
     <div className="w-full h-screen overflow-hidden ">
       <Router>
         {user?.me && <Navbar />}
         <Routes>
-          <Route path="/" element={<Home user={user} />} />
+          <Route
+            path="/"
+            element={<Home user={user} userLoading={loading} />}
+          />
           <Route path="/login" element={<LoginPage />} />
           <Route
             path="/projects/:projectId"
-            element={<ProjectBoard user={user} />}
+            element={<ProjectBoard user={user} userLoading={loading} />}
           />
         </Routes>
       </Router>

@@ -10,7 +10,15 @@ function CreateTask({ project, setShowForm }) {
   const dueRef = useRef();
 
   const [newTask] = useMutation(CREATE_TASK, {
-    refetchQueries: [{ query: GET_PROJECT }, "getProject"],
+    refetchQueries: [
+      {
+        query: GET_PROJECT,
+        variables: {
+          projectId: project?.getProject.id,
+        },
+      },
+      "getProject",
+    ],
   });
 
   const handleSubmit = async (e) => {
@@ -54,13 +62,13 @@ function CreateTask({ project, setShowForm }) {
           className="w-3/4 py-2 px-4 border rounded-md border-gray-400 mt-4"
           placeholder="Description"
         />
-        <div className="w-3/4">
+        <div className="w-3/4 mt-2">
           <label htmlFor="due">Due Date</label>
           <input
             name="due"
             ref={dueRef}
             type="date"
-            className="w-full py-2 px-4 border rounded-md border-gray-400 mt-4"
+            className="w-full py-2 px-4 border rounded-md border-gray-400"
           />
         </div>
         <button className="drop-shadow-md rounded-md p-2 w-3/4 bg-blue-600 text-white mt-4">

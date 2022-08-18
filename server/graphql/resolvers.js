@@ -159,6 +159,26 @@ module.exports = {
       }
     },
 
+    deleteProject: async (parent, { id }, { models, req }) => {
+      const project = await models.Project.findByPk(id);
+
+      if (project.userId !== req.session.userId) {
+        return false;
+      }
+
+      try {
+        await models.Project.destroy({
+          where: {
+            id,
+          },
+        });
+        return true;
+      } catch (err) {
+        console.log(err);
+        return false;
+      }
+    },
+
     createTask: async (parent, args, { models }) => {
       try {
         const task = await models.Task.create(args);
@@ -176,6 +196,26 @@ module.exports = {
       if (update) {
         return true;
       } else {
+        return false;
+      }
+    },
+
+    editTask: async (parent, { id, ...args }, { models }) => {
+      const task = await models.Task.findByPk(id);
+      await task.update(args);
+      return task;
+    },
+
+    deleteTask: async (parent, { id }, { models }) => {
+      try {
+        await models.Task.destroy({
+          where: {
+            id,
+          },
+        });
+        return true;
+      } catch (err) {
+        console.log(err);
         return false;
       }
     },

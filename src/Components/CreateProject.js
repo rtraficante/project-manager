@@ -1,16 +1,17 @@
 import { useMutation } from "@apollo/client";
 import React, { useRef } from "react";
-import { useNavigate } from "react-router";
 import { CREATE_PROJECT } from "../graphql/mutations/project";
-import { client } from "../index";
+
 import { XIcon } from "@heroicons/react/solid";
+
+import { PROJECTS_BY_USER_ID } from "../graphql/queries/project";
 
 function CreateProject({ user, openCreateProject, setOpenCreateProject }) {
   const nameRef = useRef();
-  const navigate = useNavigate();
 
-  const [newProject, { data, loading: projectLoading, error }] =
-    useMutation(CREATE_PROJECT);
+  const [newProject] = useMutation(CREATE_PROJECT, {
+    refetchQueries: [{ query: PROJECTS_BY_USER_ID }, "GetProjectsByUserId"],
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,21 +21,20 @@ function CreateProject({ user, openCreateProject, setOpenCreateProject }) {
         userId: user?.me.id,
       },
     });
-    // .then(() => client.resetStore());
-    navigate("/");
+    setOpenCreateProject(false);
   };
 
   return (
     <div className="absolute flex justify-center w-screen h-screen z-50 bg-gray-600 bg-opacity-60">
-      <div className="border mt-28 w-3/4 h-[90px] bg-white rounded-md drop-shadow">
+      <div className="border mt-28 w-3/4 max-w-[500px] h-[90px] bg-white rounded-md drop-shadow">
         <div>
           <XIcon
             className="w-5 right-0 top-0 m-2 absolute cursor-pointer hover:scale-110"
-            onClick={() => setOpenCreateProject(!openCreateProject)}
+            onClick={() => setOpenCreateProject(false)}
           />
         </div>
         <form
-          className="p-6  flex space-x-4 justify-center"
+          className="p-6 flex space-x-4 justify-center"
           onSubmit={handleSubmit}
         >
           <input
