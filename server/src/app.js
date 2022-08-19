@@ -10,6 +10,8 @@ const {
 } = require("apollo-server-core");
 require("dotenv").config();
 
+const __prod__ = process.env.NODE_ENV;
+
 const session = require("express-session");
 const RedisStore = require("connect-redis")(session);
 const redis = require("redis");
@@ -19,10 +21,9 @@ const PORT = process.env.PORT || 4000;
 const corsOptions = {
   origin: [
     "http://localhost:3000",
-    "https://studio.apollographql.com",
     "https://project-management-client-1.herokuapp.com",
   ],
-  credentials: true,
+  credentials: "include",
 };
 
 const app = express();
@@ -38,7 +39,7 @@ app.use(
     cookie: {
       maxAge: 1000 * 60 * 60 * 24 * 365 * 10, // 10 years
       httpOnly: true,
-      secure: true,
+      secure: __prod__,
       sameSite: "lax",
     },
     saveUninitialized: false,
