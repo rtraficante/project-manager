@@ -17,7 +17,11 @@ const redis = require("redis");
 const PORT = process.env.PORT || 4000;
 
 const corsOptions = {
-  origin: ["http://localhost:3000", "https://studio.apollographql.com"],
+  origin: [
+    "http://localhost:3000",
+    "https://studio.apollographql.com",
+    "https://project-management-client-1.herokuapp.com",
+  ],
   credentials: true,
 };
 
