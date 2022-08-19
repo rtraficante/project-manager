@@ -19,10 +19,7 @@ const redis = require("redis");
 const PORT = process.env.PORT || 4000;
 
 const corsOptions = {
-  origin: [
-    "http://localhost:3000",
-    "https://sweet-raindrop-0e8618.netlify.app",
-  ],
+  origin: ["http://localhost:3000", "http://www.rt-projectmanager.com/"],
   credentials: true,
 };
 
@@ -39,7 +36,7 @@ app.use(
     cookie: {
       maxAge: 1000 * 60 * 60 * 24 * 365 * 10, // 10 years
       httpOnly: true,
-      secure: __prod__,
+      secure: false,
       sameSite: "lax",
     },
     saveUninitialized: false,
