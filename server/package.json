@@ -21,7 +21,7 @@
   },
   "scripts": {
     "start:dev": "nodemon src/app.js",
-    "start:prod": "node src/app.js"
+    "start": "node src/app.js"
   },
   "eslintConfig": {
     "extends": [

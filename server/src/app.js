@@ -23,7 +23,7 @@ const corsOptions = {
 
 const app = express();
 
-const redisClient = redis.createClient(process.env.REDIS_URL);
+const redisClient = redis.createClient();
 app.set("proxy", 1);
 
 app.use(
