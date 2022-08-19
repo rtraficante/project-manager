@@ -28,7 +28,7 @@ const corsOptions = {
 const app = express();
 
 const redisClient = redis.createClient(process.env.REDIS_URL);
-app.set("proxy", 1);
+app.set("trust proxy", 1);
 
 app.use(
   session({
