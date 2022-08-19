@@ -23,7 +23,7 @@ const corsOptions = {
     "http://localhost:3000",
     "https://sweet-raindrop-0e8618.netlify.app",
   ],
-  credentials: "include",
+  credentials: true,
 };
 
 const app = express();
