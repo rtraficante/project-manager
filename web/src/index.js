@@ -5,7 +5,7 @@ import App from "./App";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 export const client = new ApolloClient({
-  uri: "https://project-management-server-rt.herokuapp.com/graphql",
+  uri: "http://rt-projectmanager.com/graphql",
   credentials: "include",
   cache: new InMemoryCache(),
 });
