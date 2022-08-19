@@ -21,7 +21,7 @@ const PORT = process.env.PORT || 4000;
 const corsOptions = {
   origin: [
     "http://localhost:3000",
-    "https://project-management-client-1.herokuapp.com",
+    "https://sweet-raindrop-0e8618.netlify.app",
   ],
   credentials: "include",
 };
