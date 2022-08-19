@@ -19,7 +19,7 @@ const redis = require("redis");
 const PORT = process.env.PORT || 4000;
 
 const corsOptions = {
-  origin: ["http://localhost:3000", "http://www.rt-projectmanager.com/"],
+  origin: ["http://localhost:3000", "http://www.rt-projectmanager.com"],
   credentials: true,
 };
 
