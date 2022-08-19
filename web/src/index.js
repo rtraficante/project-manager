@@ -5,7 +5,7 @@ import App from "./App";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 export const client = new ApolloClient({
-  uri: "https://api.rt-projectmanager.com/graphql",
+  uri: process.env.REACT_APP_APOLLO_URI,
   credentials: "include",
   cache: new InMemoryCache(),
 });
