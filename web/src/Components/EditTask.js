@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 import { XIcon } from "@heroicons/react/solid";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { EDIT_TASK } from "../graphql/mutations/task";
 import { GET_PROJECT } from "../graphql/queries/project";
 import { formatDate } from "../utils";
