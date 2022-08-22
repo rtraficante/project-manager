@@ -46,3 +46,12 @@ PostgreSQL
 Redis
 
 TailwindCSS
+
+## Features Planned
+### Organizations
+- Allow users to create an organization
+- Organization admin can add other users to the organization
+- An Organization can own many projects
+- Users in the organization can be added to these projects by the admins
+
+
