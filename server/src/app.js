@@ -7,6 +7,7 @@ const typeDefs = require("./graphql/typeDefs");
 const models = require("./models");
 const {
   ApolloServerPluginLandingPageGraphQLPlayground,
+  ApolloServerPluginLandingPageDisabled,
 } = require("apollo-server-core");
 require("dotenv").config();
 
@@ -49,7 +50,11 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: ({ req, res }) => ({ models, req, res }),
-  plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
+  plugins: [
+    __prod__
+      ? ApolloServerPluginLandingPageDisabled()
+      : ApolloServerPluginLandingPageGraphQLPlayground(),
+  ],
 });
 
 const startApp = async () => {
