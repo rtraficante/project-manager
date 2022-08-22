@@ -16,7 +16,7 @@ function ProjectThumbnail({
           ? () => setOpenCreateProject(true)
           : () => navigate(`/projects/${id}`)
       }
-      className="flex items-center justify-center w-[320px] h-[200px] max-w-[400px] border-gray-600 bg-white drop-shadow-xl rounded-lg active:opacity-70 active:bg-gray-200 hover:scale-105 hover:bg-gray-50 transition duration-150"
+      className="flex items-center justify-center w-[320px] h-[200px] max-w-[400px] border-gray-200 bg-white drop-shadow border rounded-lg active:opacity-70 active:bg-gray-200 hover:scale-105 hover:bg-gray-50 transition duration-150"
     >
       <div className="flex space-x-2">
         {name === "Create a new project" ? (
