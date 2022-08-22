@@ -18,7 +18,7 @@ function Navbar() {
   return (
     <div className="bg-blue-600 h-14 flex justify-between px-8 items-center text-white">
       <div>
-        <a className="font-bold" href="/">
+        <a className="font-bold hover:opacity-80" href="/">
           Project Management
         </a>
       </div>
