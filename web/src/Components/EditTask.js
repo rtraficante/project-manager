@@ -1,13 +1,17 @@
 import { useMutation } from "@apollo/client";
 import { XIcon } from "@heroicons/react/solid";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { EDIT_TASK } from "../graphql/mutations/task";
 import { GET_PROJECT } from "../graphql/queries/project";
+import { formatDate } from "../utils";
 
 function EditTask({ project, setShowTaskEdit, task }) {
-  const nameRef = useRef();
-  const descriptionRef = useRef();
-  const dueRef = useRef();
+  const [values, setValues] = useState({
+    name: task.name,
+    description: task.description || "",
+    due: task.due ? formatDate(task.due) : "",
+  });
+
   const [editTask] = useMutation(EDIT_TASK, {
     refetchQueries: [
       {
@@ -20,15 +24,19 @@ function EditTask({ project, setShowTaskEdit, task }) {
     ],
   });
 
+  const handleChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const d = new Date(dueRef.current.value);
+    const d = new Date(values.due);
 
     const edittedTask = await editTask({
       variables: {
         id: task.id,
-        name: nameRef.current.value,
-        description: descriptionRef.current.value,
+        name: values.name,
+        description: values.description,
         due: d.getTime(),
       },
     });
@@ -51,13 +59,15 @@ function EditTask({ project, setShowTaskEdit, task }) {
 
         <input
           name="name"
-          ref={nameRef}
+          value={values.name}
+          onChange={handleChange}
           placeholder="Task name"
           className="w-3/4 py-2 px-4 border rounded-md border-gray-400 mt-4"
         />
         <textarea
           name="description"
-          ref={descriptionRef}
+          value={values.description}
+          onChange={handleChange}
           className="w-3/4 py-2 px-4 border rounded-md border-gray-400 mt-4"
           placeholder="Description"
         />
@@ -65,7 +75,8 @@ function EditTask({ project, setShowTaskEdit, task }) {
           <label htmlFor="due">Due Date</label>
           <input
             name="due"
-            ref={dueRef}
+            value={values.due}
+            onChange={handleChange}
             type="date"
             className="w-full py-2 px-4 border rounded-md border-gray-400"
           />
