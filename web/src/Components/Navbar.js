@@ -1,12 +1,10 @@
 import React from "react";
-import { useQuery, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { client } from "../index";
-import { ME } from "../graphql/queries/user";
 import { LOGOUT } from "../graphql/mutations/user";
 import { useNavigate } from "react-router";
 
 function Navbar() {
-  const { data } = useQuery(ME);
   const [logoutUser] = useMutation(LOGOUT);
   const navigate = useNavigate();
 
