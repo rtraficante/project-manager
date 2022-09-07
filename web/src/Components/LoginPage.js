@@ -44,7 +44,7 @@ function LoginPage() {
   return (
     <div className="w-full flex flex-col items-center m-auto">
       <div className="mt-8">
-        <h2 className="font-bold text-4xl">Project Management</h2>
+        <h2 className="font-bold text-4xl text-white">Project Management</h2>
       </div>
       {loginState === "login" ? (
         <Login
