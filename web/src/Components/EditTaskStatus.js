@@ -35,7 +35,7 @@ function EditTaskStatus({ task, project, setShowTaskInfo }) {
       <select
         onChange={handleChange}
         value={selectedOption}
-        className="ml-4 border rounded p-1 text-sm"
+        className="border rounded p-1 text-sm"
       >
         <option value="Not Started">Not Started</option>
         <option value="In Progress">In Progress</option>

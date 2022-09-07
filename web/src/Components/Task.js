@@ -11,7 +11,7 @@ function Task({ task, setShowTaskInfo, setTaskShown }) {
     <>
       <button
         onClick={handleClick}
-        className="w-full bg-white flex justify-between rounded-md shadow-md p-1 px-2 items-center
+        className="w-full bg-white flex justify-between rounded-md shadow-md p-1 px-1 md:px-2 items-center
       hover:bg-gray-100 cursor-pointer transition duration-150 group text-start"
       >
         <h4 className="text-sm">{task.name}</h4>

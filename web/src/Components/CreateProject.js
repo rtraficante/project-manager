@@ -25,8 +25,8 @@ function CreateProject({ user, openCreateProject, setOpenCreateProject }) {
   };
 
   return (
-    <div className="absolute flex justify-center w-screen h-screen z-50 bg-gray-600 bg-opacity-60">
-      <div className="border mt-28 w-3/4 max-w-[500px] p-2 h-[120px] bg-white rounded-md drop-shadow">
+    <div className="fixed flex justify-center w-screen h-screen z-50 bg-gray-600 bg-opacity-60">
+      <div className="border mt-28 w-[95%] md:w-3/4 max-w-[500px] p-2 max-h-[170px] md:max-h-[120px] bg-white rounded-md drop-shadow">
         <div className="flex mt-1 my-4 items-center">
           <h2 className="justify-self-center flex-1 text-center text-lg">
             Create A New Project
@@ -37,7 +37,7 @@ function CreateProject({ user, openCreateProject, setOpenCreateProject }) {
           />
         </div>
         <form
-          className="flex space-x-4 justify-center px-2"
+          className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4 justify-center px-2"
           onSubmit={handleSubmit}
         >
           <input

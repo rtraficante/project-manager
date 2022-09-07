@@ -50,9 +50,10 @@ function TaskInformation({
               }}
             />
           </div>
-          <div className="flex items-center mt-4">
+          <div className="flex space-x-2 items-center mt-4">
             <p className="text-sm">
-              Status: <strong>{task.status}</strong>
+              Status:
+              {/* <strong>{task.status}</strong> */}
             </p>
             <EditTaskStatus
               task={task}
@@ -78,7 +79,7 @@ function TaskInformation({
             </p>
           </div>
         </div>
-        <div className="w-3/4 mx-auto flex gap-4 mt-8">
+        <div className="w-full text-sm md:text-md md:w-3/4 mx-auto flex gap-4 mt-4 md:mt-8">
           <button
             onClick={() => {
               setShowTaskEdit(true);

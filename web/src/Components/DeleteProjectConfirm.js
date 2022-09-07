@@ -22,8 +22,8 @@ function DeleteProjectConfirm({ project, setShowDeleteConfirm }) {
   };
 
   return (
-    <div className="absolute w-full top-0 right-0 bg-gray-600 bg-opacity-60 h-full">
-      <div className="flex flex-col border m-auto p-4 pb-6 items-center w-full bg-white rounded-md mt-24 max-w-[540px]">
+    <div className="fixed w-full top-0 right-0 bg-gray-600 bg-opacity-60 h-full">
+      <div className="flex flex-col border m-auto p-4 pb-6 items-center w-[95%] bg-white rounded-md mt-24 max-w-[540px]">
         <div className="flex flex-col sm:flex-row space-x-1">
           <h2 className="text-center text-xl text-red-800 font-bold">
             WARNING:
