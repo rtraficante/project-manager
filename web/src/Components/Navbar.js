@@ -18,15 +18,14 @@ function Navbar() {
   return (
     <div className="bg-blue-600 h-14 flex justify-between px-8 items-center text-white">
       <div>
-        <a className="font-bold hover:opacity-80" href="/">
-          Project Management
-        </a>
+        <button className="font-bold p-2 rounded hover:bg-blue-400">
+          <a href="/">Project Management</a>
+        </button>
       </div>
       <div>
         <div className="flex space-x-4 items-center">
-          <p className="font-bold">{data?.me.email}</p>
           <button
-            className="hover:bg-blue-400 rounded-lg p-2"
+            className="hover:bg-blue-400 bg-blue-600 rounded p-2"
             onClick={handleLogout}
           >
             Logout
