@@ -14,16 +14,16 @@ function Navbar() {
   };
 
   return (
-    <div className="bg-blue-600 h-14 flex justify-between px-8 items-center text-white">
+    <div className="h-14 flex justify-between px-8 items-center text-white shadow">
       <div>
-        <button className="font-bold p-2 rounded hover:bg-blue-400">
+        <button className="font-bold p-2 rounded hover:bg-blue-500 hover:bg-opacity-60">
           <a href="/">Project Management</a>
         </button>
       </div>
       <div>
         <div className="flex space-x-4 items-center">
           <button
-            className="hover:bg-blue-400 bg-blue-600 rounded p-2"
+            className="hover:bg-blue-500 hover:bg-opacity-60 rounded p-2"
             onClick={handleLogout}
           >
             Logout

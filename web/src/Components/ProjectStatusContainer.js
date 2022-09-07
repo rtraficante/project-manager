@@ -8,7 +8,7 @@ function ProjectStatusContainer({
   setTaskShown,
 }) {
   return (
-    <div className="bg-gray-200 shadow-md p-2 h-fit max-h-[85vh] w-[280px]">
+    <div className="bg-gray-200 shadow-md p-2 h-fit max-h-[85vh] w-[280px] rounded">
       <h4 className="text-center font-bold">{status}</h4>
       <div className="space-y-2 rounded-md mt-2 overflow-y-auto max-h-[55vh]">
         {project.getProject.tasks

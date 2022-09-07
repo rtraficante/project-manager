@@ -26,10 +26,10 @@ function Home({ user, userLoading }) {
         />
       ) : null}
       <div className="p-8 max-w-[1200px] mx-auto flex flex-col items-center md:inline-block">
-        <h2 className="text-4xl mb-4">My Projects</h2>
+        <h2 className="text-4xl mb-4 text-white">My Projects</h2>
         {loading ? (
           <div>
-            <p className="text-center text-xl">Loading...</p>
+            <p className="text-center text-xl text-white">Loading...</p>
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
