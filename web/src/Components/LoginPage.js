@@ -12,6 +12,9 @@ function LoginPage() {
   const [registerUser, { data: registerData }] = useMutation(REGISTER);
   const emailRef = useRef();
   const passwordRef = useRef();
+  const firstNameRef = useRef();
+  const lastNameRef = useRef();
+  const usernameRef = useRef();
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -32,6 +35,9 @@ function LoginPage() {
     e.preventDefault();
     const response = await registerUser({
       variables: {
+        firstName: firstNameRef.current.value,
+        lastName: lastNameRef.current.value,
+        username: usernameRef.current.value,
         email: emailRef.current.value,
         password: passwordRef.current.value,
       },
@@ -59,6 +65,9 @@ function LoginPage() {
           handleRegister={handleRegister}
           emailRef={emailRef}
           passwordRef={passwordRef}
+          firstNameRef={firstNameRef}
+          lastNameRef={lastNameRef}
+          usernameRef={usernameRef}
           setLoginState={setLoginState}
           registerData={registerData}
         />

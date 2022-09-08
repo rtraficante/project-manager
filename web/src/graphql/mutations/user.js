@@ -16,8 +16,20 @@ export const LOGIN = gql`
 `;
 
 export const REGISTER = gql`
-  mutation Register($email: String!, $password: String!) {
-    register(email: $email, password: $password) {
+  mutation Register(
+    $firstName: String
+    $lastName: String
+    $username: String!
+    $email: String!
+    $password: String!
+  ) {
+    register(
+      firstName: $firstName
+      lastName: $lastName
+      username: $username
+      email: $email
+      password: $password
+    ) {
       errors {
         field
         message
@@ -25,6 +37,9 @@ export const REGISTER = gql`
       user {
         id
         email
+        username
+        firstName
+        lastName
       }
     }
   }

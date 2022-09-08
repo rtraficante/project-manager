@@ -6,6 +6,9 @@ function Register({
   passwordRef,
   setLoginState,
   registerData,
+  firstNameRef,
+  lastNameRef,
+  usernameRef,
 }) {
   return (
     <div className="mt-12 p-8 py-12 w-full max-w-[400px] bg-white rounded shadow-md">
@@ -22,6 +25,24 @@ function Register({
         </div>
       ) : null}
       <form onSubmit={handleRegister} className="flex flex-col space-y-4">
+        <input
+          ref={firstNameRef}
+          name="firstName"
+          placeholder="Enter first name"
+          className="p-2 rounded-md border-2"
+        />
+        <input
+          ref={lastNameRef}
+          name="lastName"
+          placeholder="Enter last name"
+          className="p-2 rounded-md border-2"
+        />
+        <input
+          ref={usernameRef}
+          name="username"
+          placeholder="Enter username"
+          className="p-2 rounded-md border-2"
+        />
         <input
           ref={emailRef}
           name="email"

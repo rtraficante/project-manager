@@ -50,15 +50,15 @@ module.exports = {
   Mutation: {
     register: async (
       parent,
-      { password, email, firstName, lastName },
+      { password, email, username, firstName, lastName },
       { models, req }
     ) => {
-      if (email.length <= 5) {
+      if (!email.includes("@")) {
         return {
           errors: [
             {
               field: "email",
-              message: "email length must be greater than 5",
+              message: "email format is not valid",
             },
           ],
         };
@@ -75,23 +75,54 @@ module.exports = {
         };
       }
 
+      if (username.length <= 5) {
+        return {
+          errors: [
+            {
+              field: "username",
+              message: "username length must be greater than 5",
+            },
+          ],
+        };
+      }
+
       const hashedPassword = await bcrypt.hash(password, 10);
       let user;
       try {
         user = await models.User.create({
           email,
+          username,
           password: hashedPassword,
           firstName,
           lastName,
         });
       } catch (err) {
-        if (err.original.detail.includes("already exists")) {
+        const errDetails = err.original.detail;
+        if (
+          errDetails.includes("already exists") &&
+          errDetails.includes("email")
+        ) {
           // duplicate email
           return {
             errors: [
               {
                 field: "email",
                 message: "email already exists",
+              },
+            ],
+          };
+        }
+
+        if (
+          errDetails.includes("already exists") &&
+          errDetails.includes("username")
+        ) {
+          // duplicate email
+          return {
+            errors: [
+              {
+                field: "username",
+                message: "username already exists",
               },
             ],
           };

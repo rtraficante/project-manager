@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import AccountPage from "./Components/AccountPage";
 import Home from "./Components/Home";
 import LoginPage from "./Components/LoginPage";
 import Navbar from "./Components/Navbar";
@@ -22,6 +23,10 @@ function App() {
           <Route
             path="/projects/:projectId"
             element={<ProjectBoard user={user} userLoading={loading} />}
+          />
+          <Route
+            path="/account"
+            element={<AccountPage user={user} userLoading={loading} />}
           />
         </Routes>
       </Router>

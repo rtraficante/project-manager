@@ -3,6 +3,7 @@ import { useMutation } from "@apollo/client";
 import { client } from "../index";
 import { LOGOUT } from "../graphql/mutations/user";
 import { useNavigate } from "react-router";
+import { UserIcon } from "@heroicons/react/outline";
 
 function Navbar() {
   const [logoutUser] = useMutation(LOGOUT);
@@ -21,7 +22,14 @@ function Navbar() {
         </button>
       </div>
       <div>
-        <div className="flex space-x-4 items-center">
+        <div className="flex space-x-4 items-center justify-center">
+          <a
+            href="/account"
+            className="flex space-x-1 items-center hover:bg-blue-500 hover:bg-opacity-60 rounded p-2"
+          >
+            <UserIcon className="w-5" />
+            <p>Account</p>
+          </a>
           <button
             className="hover:bg-blue-500 hover:bg-opacity-60 rounded p-2"
             onClick={handleLogout}

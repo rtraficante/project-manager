@@ -8,6 +8,7 @@ module.exports = gql`
     firstName: String
     lastName: String
     email: String
+    username: String
     project: [Project]
   }
 
@@ -51,6 +52,7 @@ module.exports = gql`
       firstName: String
       lastName: String
       email: String!
+      username: String!
       password: String!
     ): UserResponse!
 
