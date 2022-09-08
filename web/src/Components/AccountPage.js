@@ -13,11 +13,11 @@ const AccountPage = ({ user, userLoading }) => {
   return (
     <div>
       <div className="max-w-[680px] space-y-4 mt-8 mx-auto">
-        <h2 className="text-white font-bold text-xl">
+        <h2 className="text-white font-bold text-2xl">
           {user?.me.username}'s Account
         </h2>
         <div className="bg-white p-6 rounded shadow">
-          <h2 className="text-lg font-bold mb-2">User Information</h2>
+          <h2 className="text-xl font-bold mb-2">User Information</h2>
           <div>
             <p>
               <strong>First Name:</strong> {user?.me.firstName}

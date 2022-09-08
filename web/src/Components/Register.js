@@ -58,7 +58,7 @@ function Register({
         />
         <button
           type="submit"
-          className="w-full bg-blue-400 text-white p-2 rounded-md text-lg"
+          className="w-full  bg-blue-800 font-medium text-white p-2 rounded-md shadow-md hover:bg-blue-500 hover:shadow-lg active:bg-blue-600 transition duration-150 ease-in-out"
         >
           Sign up
         </button>
