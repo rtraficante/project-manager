@@ -32,7 +32,7 @@ const AccountPage = ({ user, userLoading }) => {
               <strong>Email:</strong> {user?.me.email}
             </p>
           </div>
-          <button className="mt-4 p-2 bg-blue-800 rounded drop-shadow-xl text-white px-4 hover:scale-105 hover:bg-blue-600">
+          <button className="mt-4 p-2 bg-blue-800 rounded drop-shadow-xl text-white px-4 hover:bg-blue-600">
             Edit Information
           </button>
         </div>

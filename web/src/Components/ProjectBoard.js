@@ -51,7 +51,7 @@ function ProjectBoard({ user, userLoading }) {
       <div className="m-2 my-4 flex flex-col sm:flex-row space-y-2 sm:space-y-0 justify-between sm:items-center max-w-[860px] md:mx-auto">
         <div className="space-x-2 md:mx-2 lg:mx-0 flex items-center">
           <button
-            className="p-2 bg-gray-800 hover:scale-105 active:bg-gray-600 text-white text-sm sm:w-[140px] rounded-md shadow-lg"
+            className="p-2 bg-blue-800 hover:bg-blue-600 text-white text-sm sm:w-[140px] rounded-md shadow-lg"
             onClick={() => setShowCreateForm(true)}
           >
             <div className="flex justify-center space-x-2">
@@ -60,7 +60,7 @@ function ProjectBoard({ user, userLoading }) {
             </div>
           </button>
           <button
-            className="p-2 bg-gray-800 text-white text-sm sm:w-[140px] rounded-md shadow-lg hover:scale-105 active:bg-gray-600"
+            className="p-2 bg-blue-800 text-white text-sm sm:w-[140px] rounded-md shadow-lg hover:bg-blue-600"
             onClick={() => setShowDeleteConfirm(true)}
           >
             <div className="flex justify-center space-x-2">
