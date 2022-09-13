@@ -36,8 +36,8 @@ function TaskInformation({
   return (
     <div className="absolute w-full top-0 right-0 bg-gray-600 bg-opacity-60 h-full">
       <div
-        className="flex flex-col border m-auto p-4 pb-6 items-start
-      w-11/12 md:w bg-white rounded-md mt-24 max-w-[600px] text-gray-800"
+        className="flex flex-col shadow m-auto p-4 pb-6 items-start
+      w-11/12 md:w bg-gray-800 text-white rounded-md mt-24 max-w-[600px]"
       >
         <div className="w-full">
           <div className="flex justify-between items-center">
@@ -71,7 +71,7 @@ function TaskInformation({
         </div>
         <div className="w-full mt-8">
           <h4 className="font-bold text-md">Description</h4>
-          <div className="rounded p-4 bg-gray-100 mt-2">
+          <div className="rounded p-4 bg-gray-700 mt-2">
             <p className="text-sm">
               {task.description
                 ? task.description
@@ -85,13 +85,13 @@ function TaskInformation({
               setShowTaskEdit(true);
               setShowTaskInfo(false);
             }}
-            className="p-2 w-full rounded-md text-white bg-blue-600"
+            className="p-2 w-full rounded-md text-white bg-blue-800 hover:bg-blue-600"
           >
             Edit Task Information
           </button>
           <button
             onClick={handleDelete}
-            className="p-2 w-full rounded-md text-white bg-red-800"
+            className="p-2 w-full rounded-md text-white bg-red-700 hover:bg-red-600"
           >
             Delete Task
           </button>

@@ -25,8 +25,8 @@ function CreateProject({ user, openCreateProject, setOpenCreateProject }) {
   };
 
   return (
-    <div className="fixed flex justify-center w-screen h-screen z-50 bg-gray-600 bg-opacity-60">
-      <div className="border mt-28 w-[95%] md:w-3/4 max-w-[500px] p-2 max-h-[170px] md:max-h-[120px] bg-white rounded-md drop-shadow">
+    <div className="fixed w-full top-0 right-0 bg-gray-600 bg-opacity-60 h-full">
+      <div className="flex m-auto flex-col mt-28 w-[95%] md:w-3/4 max-w-[500px] p-2 pb-4 max-h-[170px] md:max-h-[140px] bg-gray-800 text-white rounded-md shadow">
         <div className="flex mt-1 my-4 items-center">
           <h2 className="justify-self-center flex-1 text-center text-lg">
             Create A New Project
@@ -42,10 +42,10 @@ function CreateProject({ user, openCreateProject, setOpenCreateProject }) {
         >
           <input
             ref={nameRef}
-            className="border p-2 rounded-md flex-1"
+            className="border p-2 rounded-md flex-1 bg-gray-700"
             placeholder="Project name..."
           />
-          <button className="bg-blue-500 p-2 rounded-md text-white hover:bg-blue-700 active-bg-blue-800">
+          <button className="bg-blue-800 p-2 rounded-md text-white hover:bg-blue-600 active:bg-opacity-80">
             Create Project
           </button>
         </form>

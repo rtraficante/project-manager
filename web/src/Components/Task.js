@@ -11,12 +11,12 @@ function Task({ task, setShowTaskInfo, setTaskShown }) {
     <>
       <button
         onClick={handleClick}
-        className="w-full bg-white flex justify-between rounded-md shadow-md p-1 px-1 md:px-2 items-center
-      hover:bg-gray-100 cursor-pointer transition duration-150 group text-start"
+        className="w-full bg-gray-700 flex justify-between rounded-md shadow-md p-1 px-1 md:px-2 items-center
+      hover:bg-opacity-70 cursor-pointer transition duration-150 group text-start"
       >
         <h4 className="text-sm">{task.name}</h4>
-        <div className="hover:bg-gray-200 p-1 rounded">
-          <PencilAltIcon className="w-4 text-gray-600 opacity-0 group-hover:opacity-100 " />
+        <div className="hover:bg-opacity-90 p-1 rounded">
+          <PencilAltIcon className="w-4 text-white opacity-0 group-hover:opacity-100 " />
         </div>
       </button>
     </>

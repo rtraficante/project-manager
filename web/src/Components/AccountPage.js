@@ -16,7 +16,7 @@ const AccountPage = ({ user, userLoading }) => {
         <h2 className="text-white font-bold text-2xl">
           {user?.me.username}'s Account
         </h2>
-        <div className="bg-white p-6 rounded shadow">
+        <div className="bg-gray-800 text-white p-6 rounded shadow">
           <h2 className="text-xl font-bold mb-2">User Information</h2>
           <div>
             <p>
