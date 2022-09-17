@@ -25,6 +25,7 @@ module.exports = gql`
     description: String
     due: Date
     status: String!
+    createdAt: String
     projectId: Int
   }
 

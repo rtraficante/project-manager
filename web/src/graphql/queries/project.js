@@ -21,6 +21,7 @@ export const GET_PROJECT = gql`
         description
         due
         status
+        createdAt
       }
     }
   }
