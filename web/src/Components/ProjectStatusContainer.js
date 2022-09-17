@@ -9,8 +9,7 @@ function ProjectStatusContainer({
 }) {
   const tasks = project.getProject.tasks
     .filter((task) => task.status === status)
-    .sort((a, b) => Number(b.createdAt) - Number(a.createdAt));
-    
+    .sort((a, b) => Number(a.createdAt) - Number(b.createdAt));
 
   return (
     <div className="bg-gray-800 text-white shadow-md p-2 h-fit max-h-[85vh] w-[280px] rounded">
