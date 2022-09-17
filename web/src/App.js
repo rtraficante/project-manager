@@ -11,7 +11,7 @@ function App() {
   const { data: user, loading } = useQuery(ME);
 
   return (
-    <div className="w-full h-screen bg-gradient-to-br from-gray-900 via-blue-800 to-blue-400 overflow-hidden ">
+    <div className="w-full h-screen bg-gray-900 overflow-hidden ">
       <Router>
         {user?.me && <Navbar />}
         <Routes>

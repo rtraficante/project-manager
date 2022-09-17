@@ -49,7 +49,7 @@ function EditTask({ project, setShowTaskEdit, task }) {
     <div className="absolute w-full top-0 right-0 bg-gray-600 bg-opacity-60 h-full">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col border m-auto p-4 pb-6 items-center w-[95%] md:w-3/4 bg-white rounded-md mt-24 max-w-[600px]"
+        className="flex flex-col shadow m-auto p-4 pb-6 items-center w-[95%] md:w-3/4 bg-gray-800 text-white rounded-md mt-24 max-w-[600px]"
       >
         <XIcon
           onClick={() => setShowTaskEdit(false)}
@@ -62,13 +62,13 @@ function EditTask({ project, setShowTaskEdit, task }) {
           value={values.name}
           onChange={handleChange}
           placeholder="Task name"
-          className="w-full md:w-3/4 py-2 px-4 border rounded-md border-gray-400 mt-4"
+          className="w-full md:w-3/4 py-2 px-4 border bg-gray-700 rounded-md border-gray-400 mt-4"
         />
         <textarea
           name="description"
           value={values.description}
           onChange={handleChange}
-          className="w-full md:w-3/4 py-2 px-4 border rounded-md border-gray-400 mt-4"
+          className="w-full md:w-3/4 py-2 px-4 border rounded-md bg-gray-700 border-gray-400 mt-4"
           placeholder="Description"
         />
         <div className="w-full md:w-3/4 mt-2">
@@ -78,10 +78,10 @@ function EditTask({ project, setShowTaskEdit, task }) {
             value={values.due}
             onChange={handleChange}
             type="date"
-            className="w-full py-2 px-4 border rounded-md border-gray-400"
+            className="w-full py-2 px-4 border rounded-md bg-gray-700 border-gray-400"
           />
         </div>
-        <button className="drop-shadow-md rounded-md p-2 w-full md:w-3/4 bg-blue-600 text-white mt-4">
+        <button className="drop-shadow-md rounded-md p-2 w-full md:w-3/4 bg-blue-800 hover:bg-blue-600 text-white mt-4">
           Submit
         </button>
       </form>
