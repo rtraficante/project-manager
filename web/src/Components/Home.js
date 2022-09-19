@@ -45,7 +45,7 @@ function Home({ user, userLoading }) {
           </div>
         ) : (
           <div className="flex">
-            <div className="flex gap-2 max-w-full overflow-x-scroll scrollbar">
+            <div className="flex gap-2 max-w-full overflow-x-auto scrollbar">
               {projects?.getProjectsByUserId.map((project) => (
                 <ProjectThumbnail
                   user={user}
