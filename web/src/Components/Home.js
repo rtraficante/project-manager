@@ -18,7 +18,7 @@ function Home({ user, userLoading }) {
   }, [navigate, user?.me, userLoading]);
 
   return (
-    <div>
+    <div className="h-full">
       {openCreateProject ? (
         <CreateProject
           user={user}
@@ -26,7 +26,7 @@ function Home({ user, userLoading }) {
           openCreateProject={openCreateProject}
         />
       ) : null}
-      <div className="p-8 px-2 md:px-8 w-full mx-auto flex-col items-center inline-block">
+      <div className="p-8 px-2 md:px-8 w-full mx-auto items-center h-full">
         <div className="w-full flex justify-between">
           <h2 className="text-4xl mb-4 text-white">My Projects</h2>
           <button
@@ -57,6 +57,23 @@ function Home({ user, userLoading }) {
             </div>
           </div>
         )}
+        <div className="mt-4">
+          <h2 className="text-4xl mb-4 text-white">My Invitations</h2>
+          <div className="text-white bg-gray-800 rounded p-4 h-full">
+            <p>No current invitations pending.</p>
+            {/* <div className="bg-gray-900 p-4 py-2.5 rounded flex justify-between items-center shadow-md">
+              <p>user has invited you to work on project</p>
+              <div className="space-x-2">
+                <button className="p-2 bg-blue-800 hover:bg-blue-600 text-white text-sm rounded-md shadow-lg">
+                  Accept
+                </button>
+                <button className="p-2 bg-red-700 hover:bg-red-600 text-white text-sm rounded-md shadow-lg">
+                  Decline
+                </button>
+              </div>
+            </div> */}
+          </div>
+        </div>
       </div>
     </div>
   );
