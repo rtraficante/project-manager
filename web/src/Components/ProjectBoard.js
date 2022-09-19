@@ -7,7 +7,7 @@ import DeleteProjectConfirm from "./DeleteProjectConfirm";
 import EditTask from "./EditTask";
 import ProjectStatusContainer from "./ProjectStatusContainer";
 import TaskInformation from "./TaskInformation";
-import { PlusCircleIcon, TrashIcon } from "@heroicons/react/outline";
+import { PlusCircleIcon, TrashIcon } from "@heroicons/react/solid";
 
 function ProjectBoard({ user, userLoading }) {
   const navigate = useNavigate();
