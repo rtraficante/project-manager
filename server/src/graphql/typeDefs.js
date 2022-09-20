@@ -29,6 +29,13 @@ module.exports = gql`
     projectId: Int
   }
 
+  type Invitation {
+    id: Int!
+    sender: User!
+    invitee: User!
+    project: Project!
+  }
+
   type FieldError {
     field: String
     message: String
@@ -46,6 +53,7 @@ module.exports = gql`
     me: User
     getProjectsByUserId: [Project]
     getTasks(projectId: Int!): [Task!]
+    getInvites(userId: Int!): [Invitation]
   }
 
   type Mutation {
@@ -77,5 +85,7 @@ module.exports = gql`
     editTask(id: Int!, name: String, description: String, due: Date): Task!
 
     deleteTask(id: Int!): Boolean!
+
+    createInvite(projectId: Int!, senderId: Int!, inviteeId: Int!): Boolean!
   }
 `;

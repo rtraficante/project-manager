@@ -46,6 +46,29 @@ module.exports = {
       });
       return tasks;
     },
+    getInvites: async (parent, { userId }, { models }) => {
+      const invites = await models.Invitation.findAll({
+        where: {
+          inviteeId: userId,
+        },
+        include: [
+          { model: models.User, as: "invitee" },
+          { model: models.User, as: "sender" },
+          { model: models.Project, as: "invitations" },
+        ],
+      });
+
+      const res = invites.map((invite) => {
+        return {
+          id: invite.id,
+          sender: invite.sender,
+          invitee: invite.invitee,
+          project: invite.invitations,
+        };
+      });
+
+      return res;
+    },
   },
   Mutation: {
     register: async (
@@ -247,6 +270,16 @@ module.exports = {
         return true;
       } catch (err) {
         console.log(err);
+        return false;
+      }
+    },
+
+    createInvite: async (parent, args, { models }) => {
+      try {
+        await models.Invitation.create(args);
+        return true;
+      } catch (err) {
+        console.error(err);
         return false;
       }
     },
