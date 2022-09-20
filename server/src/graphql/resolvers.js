@@ -46,10 +46,10 @@ module.exports = {
       });
       return tasks;
     },
-    getInvites: async (parent, { userId }, { models }) => {
+    getInvites: async (parent, args, { req, models }) => {
       const invites = await models.Invitation.findAll({
         where: {
-          inviteeId: userId,
+          inviteeId: req.session.userId,
         },
         include: [
           { model: models.User, as: "invitee" },

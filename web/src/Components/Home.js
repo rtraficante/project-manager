@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/client";
 import { PlusCircleIcon } from "@heroicons/react/solid";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { GET_INVITES } from "../graphql/queries/invitations";
 import { PROJECTS_BY_USER_ID } from "../graphql/queries/project";
 import CreateProject from "./CreateProject";
 import ProjectThumbnail from "./ProjectThumbnail";
@@ -9,6 +10,7 @@ import ProjectThumbnail from "./ProjectThumbnail";
 function Home({ user, userLoading }) {
   const navigate = useNavigate();
   const { loading, data: projects } = useQuery(PROJECTS_BY_USER_ID);
+  const { loading: invitesloading, data: invites } = useQuery(GET_INVITES);
   const [openCreateProject, setOpenCreateProject] = useState(false);
 
   useEffect(() => {
@@ -60,18 +62,32 @@ function Home({ user, userLoading }) {
         <div className="mt-4">
           <h2 className="text-4xl mb-4 text-white">My Invitations</h2>
           <div className="text-white bg-gray-800 rounded p-4 h-full">
-            <p>No current invitations pending.</p>
-            {/* <div className="bg-gray-900 p-4 py-2.5 rounded flex justify-between items-center shadow-md">
-              <p>user has invited you to work on project</p>
-              <div className="space-x-2">
-                <button className="p-2 bg-blue-800 hover:bg-blue-600 text-white text-sm rounded-md shadow-lg">
-                  Accept
-                </button>
-                <button className="p-2 bg-red-700 hover:bg-red-600 text-white text-sm rounded-md shadow-lg">
-                  Decline
-                </button>
+            {invitesloading ? (
+              <div>
+                <p className="text-center text-xl text-white">Loading...</p>
               </div>
-            </div> */}
+            ) : invites.getInvites.length === 0 ? (
+              <p>No current invitations pending.</p>
+            ) : (
+              <div className="bg-gray-900 p-4 py-2.5 rounded flex justify-between items-center shadow-md">
+                {invites.getInvites.map((invite) => (
+                  <>
+                    <p>
+                      {invite.sender.firstName} {invite.sender.lastName} has
+                      invited you to work on {invite.project.name}.
+                    </p>
+                    <div className="space-x-2">
+                      <button className="p-2 bg-blue-800 hover:bg-blue-600 text-white text-sm rounded-md shadow-lg">
+                        Accept
+                      </button>
+                      <button className="p-2 bg-red-700 hover:bg-red-600 text-white text-sm rounded-md shadow-lg">
+                        Decline
+                      </button>
+                    </div>
+                  </>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

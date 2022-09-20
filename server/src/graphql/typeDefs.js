@@ -53,7 +53,7 @@ module.exports = gql`
     me: User
     getProjectsByUserId: [Project]
     getTasks(projectId: Int!): [Task!]
-    getInvites(userId: Int!): [Invitation]
+    getInvites: [Invitation]
   }
 
   type Mutation {
