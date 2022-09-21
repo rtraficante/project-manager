@@ -6,9 +6,7 @@ module.exports = {
 
   Query: {
     allUsers: (root, args, { models }) => {
-      return models.User.findAll({
-        include: [{ model: models.Project }],
-      });
+      return models.User.findAll();
     },
     getUser: (root, { id }, { models }) => {
       return models.User.findByPk(id, {

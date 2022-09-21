@@ -47,7 +47,7 @@ module.exports = gql`
   }
 
   type Query {
-    allUsers: [User!]!
+    allUsers: [User]!
     getUser(id: Int!): User!
     getProject(projectId: Int!): Project!
     me: User

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { GET_INVITES } from "../graphql/queries/invitations";
 import { PROJECTS_BY_USER_ID } from "../graphql/queries/project";
 import CreateProject from "./CreateProject";
+import Invites from "./Invites";
 import ProjectThumbnail from "./ProjectThumbnail";
 
 function Home({ user, userLoading }) {
@@ -71,20 +72,7 @@ function Home({ user, userLoading }) {
             ) : (
               <div className="bg-gray-900 p-4 py-2.5 rounded flex justify-between items-center shadow-md">
                 {invites.getInvites.map((invite) => (
-                  <>
-                    <p>
-                      {invite.sender.firstName} {invite.sender.lastName} has
-                      invited you to work on {invite.project.name}.
-                    </p>
-                    <div className="space-x-2">
-                      <button className="p-2 bg-blue-800 hover:bg-blue-600 text-white text-sm rounded-md shadow-lg">
-                        Accept
-                      </button>
-                      <button className="p-2 bg-red-700 hover:bg-red-600 text-white text-sm rounded-md shadow-lg">
-                        Decline
-                      </button>
-                    </div>
-                  </>
+                  <Invites key={invite.id} invite={invite} />
                 ))}
               </div>
             )}

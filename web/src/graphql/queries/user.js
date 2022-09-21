@@ -11,3 +11,13 @@ export const ME = gql`
     }
   }
 `;
+
+export const ALL_USERS = gql`
+  query allUsers {
+    allUsers {
+      firstName
+      lastName
+      email
+    }
+  }
+`;

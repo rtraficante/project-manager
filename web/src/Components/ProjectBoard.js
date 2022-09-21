@@ -7,7 +7,8 @@ import DeleteProjectConfirm from "./DeleteProjectConfirm";
 import EditTask from "./EditTask";
 import ProjectStatusContainer from "./ProjectStatusContainer";
 import TaskInformation from "./TaskInformation";
-import { PlusCircleIcon, TrashIcon } from "@heroicons/react/solid";
+import { PlusCircleIcon, TrashIcon, UserAddIcon } from "@heroicons/react/solid";
+import InviteForm from "./InviteForm";
 
 function ProjectBoard({ user, userLoading }) {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ function ProjectBoard({ user, userLoading }) {
   const [taskShown, setTaskShown] = useState({});
   const [showTaskEdit, setShowTaskEdit] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [showInviteForm, setShowInviteForm] = useState(false);
 
   useEffect(() => {
     if (!user?.me && !userLoading) {
@@ -49,25 +51,38 @@ function ProjectBoard({ user, userLoading }) {
   return (
     <>
       <div className="m-2 my-4 flex flex-col sm:flex-row space-y-2 sm:space-y-0 justify-between sm:items-center max-w-[860px] md:mx-auto">
-        <div className="space-x-2 md:mx-2 lg:mx-0 flex items-center">
-          <button
-            className="p-2 bg-blue-800 hover:bg-blue-600 text-white text-sm sm:w-[140px] rounded-md shadow-lg"
-            onClick={() => setShowCreateForm(true)}
-          >
-            <div className="flex justify-center space-x-2">
-              <PlusCircleIcon className="w-5" />
-              <p>Add Task</p>
-            </div>
-          </button>
-          <button
-            className="p-2 bg-blue-800 text-white text-sm sm:w-[140px] rounded-md shadow-lg hover:bg-blue-600"
-            onClick={() => setShowDeleteConfirm(true)}
-          >
-            <div className="flex justify-center space-x-2">
-              <TrashIcon className="w-5" />
-              <p>Delete Project</p>
-            </div>
-          </button>
+        <div className="w-full md:mx-2 lg:mx-0 flex justify-between  items-center">
+          <div className=" space-x-2">
+            <button
+              className="p-2 bg-blue-800 hover:bg-blue-600 text-white text-sm sm:w-[140px] rounded-md shadow-lg"
+              onClick={() => setShowCreateForm(true)}
+            >
+              <div className="flex justify-center space-x-2">
+                <PlusCircleIcon className="w-5" />
+                <p>Add Task</p>
+              </div>
+            </button>
+            <button
+              className="p-2 bg-blue-800 text-white text-sm sm:w-[140px] rounded-md shadow-lg hover:bg-blue-600"
+              onClick={() => setShowDeleteConfirm(true)}
+            >
+              <div className="flex justify-center space-x-2">
+                <TrashIcon className="w-5" />
+                <p>Delete Project</p>
+              </div>
+            </button>
+          </div>
+          <div>
+            <button
+              onClick={() => setShowInviteForm(true)}
+              className="p-2 bg-gray-700 text-white text-sm sm:w-[140px] rounded-md shadow-lg hover:bg-gray-600"
+            >
+              <div className="flex justify-center space-x-2 items-center">
+                <UserAddIcon className="w-5" />
+                <p>Invite User</p>
+              </div>
+            </button>
+          </div>
         </div>
       </div>
       <div className="flex h-screen mt-4 mx-2 space-x-2 justify-center">
@@ -123,6 +138,8 @@ function ProjectBoard({ user, userLoading }) {
             setShowDeleteConfirm={setShowDeleteConfirm}
           />
         )}
+
+        {showInviteForm && <InviteForm />}
       </div>
     </>
   );
