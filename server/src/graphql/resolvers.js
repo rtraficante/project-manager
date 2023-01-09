@@ -279,13 +279,58 @@ module.exports = {
       }
     },
 
-    createInvite: async (parent, args, { models }) => {
+    createInvite: async (
+      parent,
+      { senderId, projectId, inviteeId },
+      { models }
+    ) => {
       try {
-        await models.Invitation.create(args);
-        return true;
+        const invitee = await models.User.findByPk(inviteeId, {
+          include: [{ model: models.Invitation, as: "invitee" }],
+        });
+
+        for (const invite of invitee.invitee) {
+          if (invite.projectId === projectId) {
+            return {
+              errors: [
+                {
+                  message: "This user has already been invited to this project",
+                },
+              ],
+              status: false,
+            };
+          }
+        }
+
+        if (inviteeId === senderId) {
+          return {
+            errors: [
+              {
+                message:
+                  "You cannot invite yourself to a project. Please invite a valid user instead.",
+              },
+            ],
+            status: false,
+          };
+        }
+
+        await models.Invitation.create({
+          senderId,
+          projectId,
+          inviteeId,
+        });
+        return {
+          status: true,
+        };
       } catch (err) {
         console.error(err);
-        return false;
+        return {
+          errors: [
+            {
+              message: err,
+            },
+          ],
+        };
       }
     },
   },

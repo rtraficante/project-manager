@@ -6,6 +6,11 @@ export const CREATE_INVITE = gql`
       projectId: $projectId
       senderId: $senderId
       inviteeId: $inviteeId
-    )
+    ) {
+      errors {
+        message
+      }
+      status
+    }
   }
 `;

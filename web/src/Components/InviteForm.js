@@ -3,14 +3,14 @@ import { XIcon } from "@heroicons/react/solid";
 import React, { useState } from "react";
 import { CREATE_INVITE } from "../graphql/mutations/invitations";
 import { GET_USER_BY_EMAIL } from "../graphql/queries/user";
+import InviteeListing from "./InviteeListing";
 
 const InviteForm = ({ setShowInviteForm, projectId, userId }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [getUser, { loading, error, data: user }] =
-    useLazyQuery(GET_USER_BY_EMAIL);
+  const [getUser, { loading, data: user }] = useLazyQuery(GET_USER_BY_EMAIL);
 
-  const [inviteUser, {}] = useMutation(CREATE_INVITE);
-  console.log(userId, user, projectId);
+  const [inviteUser, { error: inviteError, data: inviteResponse }] =
+    useMutation(CREATE_INVITE);
 
   return (
     <div className="absolute w-full top-0 right-0 bg-gray-600 bg-opacity-60 h-full">
@@ -43,28 +43,38 @@ const InviteForm = ({ setShowInviteForm, projectId, userId }) => {
             Search
           </button>
         </form>
-        <div className="mt-8 w-full">
-          <div className="bg-gray-700 w-full p-4 rounded-md">
-            {!loading && user?.getUser ? (
-              <div className="flex items-center">
-                <p className="flex-1">{user.getUser.email}</p>
-                <button
-                  className="drop-shadow-md rounded-md p-2  bg-blue-800 hover:bg-blue-600 text-white"
-                  onClick={() => {
-                    inviteUser({
-                      variables: {
-                        projectId: Number(projectId),
-                        senderId: userId,
-                        inviteeId: user.getUser.id,
-                      },
-                    });
-                  }}
-                >
-                  Invite User
-                </button>
-              </div>
-            ) : null}
+
+        {inviteResponse?.createInvite.status === false ? (
+          <div className="bg-red-800 w-full p-4 rounded-md mt-4">
+            <div className="flex items-center">
+              <p className="flex-1">
+                {inviteResponse.createInvite.errors[0].message}
+              </p>
+            </div>
           </div>
+        ) : inviteResponse?.createInvite.status === true ? (
+          <div className="bg-green-700 w-full p-4 rounded-md mt-4">
+            <div className="flex items-center">
+              <p className="flex-1">
+                You successfully invited {user.getUser.email} to your project!
+              </p>
+            </div>
+          </div>
+        ) : null}
+
+        <div className="mt-4 w-full">
+          {!loading && user?.getUser ? (
+            <InviteeListing
+              user={user.getUser}
+              projectId={projectId}
+              inviteUser={inviteUser}
+              userId={userId}
+              inviteError={inviteError}
+              inviteResponse={inviteResponse}
+            />
+          ) : (
+            <p>Search for user to invite them to this project.</p>
+          )}
         </div>
       </div>
     </div>

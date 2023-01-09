@@ -46,6 +46,15 @@ module.exports = gql`
     user: User
   }
 
+  type InviteError {
+    message: String
+  }
+
+  type InviteResponse {
+    errors: [InviteError]
+    status: Boolean!
+  }
+
   type Query {
     allUsers: [User]!
     getUser(email: String!): User!
@@ -86,6 +95,10 @@ module.exports = gql`
 
     deleteTask(id: Int!): Boolean!
 
-    createInvite(projectId: Int!, senderId: Int!, inviteeId: Int!): Boolean!
+    createInvite(
+      projectId: Int!
+      senderId: Int!
+      inviteeId: Int!
+    ): InviteResponse!
   }
 `;

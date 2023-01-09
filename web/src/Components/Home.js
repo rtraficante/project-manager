@@ -72,7 +72,7 @@ function Home({ user, userLoading }) {
             ) : invites.getInvites.length === 0 ? (
               <p>No current invitations pending.</p>
             ) : (
-              <div className="bg-gray-900 p-4 py-2.5 rounded flex justify-between items-center shadow-md">
+              <div className="space-y-2">
                 {invites.getInvites.map((invite) => (
                   <Invites key={invite.id} invite={invite} />
                 ))}
