@@ -8,10 +8,17 @@ module.exports = {
     allUsers: (root, args, { models }) => {
       return models.User.findAll();
     },
-    getUser: (root, { id }, { models }) => {
-      return models.User.findByPk(id, {
-        include: [{ model: models.Project, as: "project" }],
-      });
+    getUser: (root, { email }, { models }) => {
+      return models.User.findOne(
+        {
+          where: {
+            email,
+          },
+        },
+        {
+          include: [{ model: models.Project, as: "project" }],
+        }
+      );
     },
     getProject: async (root, { projectId }, { models }) => {
       const project = await models.Project.findByPk(projectId, {

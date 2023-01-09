@@ -139,7 +139,13 @@ function ProjectBoard({ user, userLoading }) {
           />
         )}
 
-        {showInviteForm && <InviteForm />}
+        {showInviteForm && (
+          <InviteForm
+            setShowInviteForm={setShowInviteForm}
+            projectId={params.projectId}
+            userId={user.me.id}
+          />
+        )}
       </div>
     </>
   );
