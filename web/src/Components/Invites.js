@@ -20,11 +20,8 @@ const Invites = ({ invite }) => {
         inviteId: invite.id,
       },
     });
-    // if (projectToDelete) {
-    //   navigate("/");
-    // }
   };
-  console.log(invite);
+
   return (
     <div className="w-full flex justify-between bg-gray-900 p-4 py-2.5 rounded  items-center shadow-md">
       <p>
