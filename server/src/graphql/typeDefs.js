@@ -94,7 +94,7 @@ module.exports = gql`
 
     logout: Boolean!
 
-    createProject(name: String!): UserProject!
+    createProject(name: String!): Project!
 
     deleteProject(id: Int!): Boolean!
 

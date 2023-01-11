@@ -245,16 +245,28 @@ module.exports = {
     },
 
     deleteProject: async (parent, { id }, { models, req }) => {
-      const project = await models.Project.findByPk(id);
+      const project = await models.Project.findByPk(id, {
+        include: [{ model: models.User, as: "users" }],
+      });
 
-      if (project.userId !== req.session.userId) {
-        return false;
+      let potentialUserId = null;
+
+      for (const user of project.users) {
+        if (user.id === req.session.userId) {
+          potentialUserId = user.id;
+        }
       }
+      if (!potentialUserId) return false;
 
       try {
         await models.Project.destroy({
           where: {
             id,
+          },
+        });
+        await models.User_Project.destroy({
+          where: {
+            projectId: id,
           },
         });
         return true;

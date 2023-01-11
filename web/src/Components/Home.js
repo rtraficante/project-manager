@@ -14,6 +14,8 @@ function Home({ user, userLoading }) {
   const { loading: invitesloading, data: invites } = useQuery(GET_INVITES);
   const [openCreateProject, setOpenCreateProject] = useState(false);
 
+  console.log(projects);
+
   useEffect(() => {
     if (!user?.me && !userLoading) {
       navigate("/login");
