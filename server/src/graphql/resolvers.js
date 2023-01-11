@@ -245,6 +245,7 @@ module.exports = {
     },
 
     deleteProject: async (parent, { id }, { models, req }) => {
+      //TODO: DELETE ALL INVITES WHEN ASSOCIATED WITH PROJECT BEING DELETED
       const project = await models.Project.findByPk(id, {
         include: [{ model: models.User, as: "users" }],
       });
@@ -327,6 +328,25 @@ module.exports = {
           include: [{ model: models.Invitation, as: "invitee" }],
         });
 
+        const userProjects = await models.User_Project.findAll({
+          where: {
+            projectId,
+          },
+        });
+
+        for (const project of userProjects) {
+          if (project.userId === inviteeId) {
+            return {
+              errors: [
+                {
+                  message: "This user is already a member of this project",
+                },
+              ],
+              status: false,
+            };
+          }
+        }
+
         for (const invite of invitee.invitee) {
           if (invite.projectId === projectId) {
             return {
@@ -372,12 +392,28 @@ module.exports = {
       }
     },
 
-    acceptInvite: async (_, { inviteId }, { models }) => {
-      const invite = await models.Invitation.findByPk(inviteId);
-      const project = await models.Project.findByPk(invite.projectId);
-      const user = await models.User.findByPk(invite.inviteeId);
+    acceptInvite: async (_, { inviteId }, { models, req }) => {
+      try {
+        const invite = await models.Invitation.findByPk(inviteId);
+        if (req.session.userId !== invite.inviteeId) {
+          return false;
+        }
 
-      await project.addUser(user);
+        const project = await models.Project.findByPk(invite.projectId);
+        const user = await models.User.findByPk(invite.inviteeId);
+        await user.addProject(project);
+
+        await models.Invitation.destroy({
+          where: {
+            id: inviteId,
+          },
+        });
+
+        return true;
+      } catch (err) {
+        console.log(err);
+        return false;
+      }
     },
   },
 };

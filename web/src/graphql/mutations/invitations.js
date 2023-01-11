@@ -14,3 +14,9 @@ export const CREATE_INVITE = gql`
     }
   }
 `;
+
+export const ACCEPT_INVITE = gql`
+  mutation ($inviteId: Int!) {
+    acceptInvite(inviteId: $inviteId)
+  }
+`;
