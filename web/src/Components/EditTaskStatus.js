@@ -11,7 +11,7 @@ function EditTaskStatus({ task, project, setShowTaskInfo }) {
       {
         query: GET_PROJECT,
         variables: {
-          projectId: project?.getProject.id,
+          projectId: project?.getProject.project.id,
         },
       },
       "getProject",

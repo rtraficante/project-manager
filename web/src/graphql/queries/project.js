@@ -4,7 +4,10 @@ export const PROJECTS_BY_USER_ID = gql`
   query GetProjectsByUserId {
     getProjectsByUserId {
       id
-      name
+      project {
+        id
+        name
+      }
     }
   }
 `;
@@ -12,16 +15,28 @@ export const PROJECTS_BY_USER_ID = gql`
 export const GET_PROJECT = gql`
   query getProject($projectId: Int!) {
     getProject(projectId: $projectId) {
-      id
-      name
-      userId
-      tasks {
+      errors {
+        type
+        message
+      }
+      project {
         id
         name
-        description
-        due
-        status
-        createdAt
+        tasks {
+          id
+          name
+          description
+          due
+          status
+          createdAt
+        }
+        users {
+          id
+          username
+          email
+          firstName
+          lastName
+        }
       }
     }
   }

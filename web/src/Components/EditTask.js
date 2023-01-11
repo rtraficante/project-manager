@@ -17,7 +17,7 @@ function EditTask({ project, setShowTaskEdit, task }) {
       {
         query: GET_PROJECT,
         variables: {
-          projectId: project?.getProject.id,
+          projectId: project?.getProject.project.id,
         },
       },
       "getProject",

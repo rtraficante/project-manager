@@ -14,8 +14,6 @@ function Home({ user, userLoading }) {
   const { loading: invitesloading, data: invites } = useQuery(GET_INVITES);
   const [openCreateProject, setOpenCreateProject] = useState(false);
 
-  console.log(invites);
-
   useEffect(() => {
     if (!user?.me && !userLoading) {
       navigate("/login");
@@ -51,12 +49,12 @@ function Home({ user, userLoading }) {
         ) : (
           <div className="flex">
             <div className="flex gap-2 max-w-full overflow-x-auto scrollbar">
-              {projects?.getProjectsByUserId.map((project) => (
+              {projects?.getProjectsByUserId.map((userProject) => (
                 <ProjectThumbnail
                   user={user}
-                  key={project.id}
-                  name={project.name}
-                  id={project.id}
+                  key={userProject.project.id}
+                  name={userProject.project.name}
+                  id={userProject.project.id}
                 />
               ))}
             </div>
@@ -69,11 +67,11 @@ function Home({ user, userLoading }) {
               <div>
                 <p className="text-center text-xl text-white">Loading...</p>
               </div>
-            ) : invites.getInvites.length === 0 ? (
+            ) : invites?.getInvites.length === 0 ? (
               <p>No current invitations pending.</p>
             ) : (
               <div className="space-y-2">
-                {invites.getInvites.map((invite) => (
+                {invites?.getInvites.map((invite) => (
                   <Invites key={invite.id} invite={invite} />
                 ))}
               </div>

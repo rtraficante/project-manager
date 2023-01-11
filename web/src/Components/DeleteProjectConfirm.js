@@ -13,7 +13,7 @@ function DeleteProjectConfirm({ project, setShowDeleteConfirm }) {
   const handleDelete = async () => {
     const projectToDelete = await deleteProject({
       variables: {
-        id: project?.getProject.id,
+        id: project?.getProject.project.id,
       },
     });
     if (projectToDelete) {

@@ -18,7 +18,6 @@ function CreateProject({ user, openCreateProject, setOpenCreateProject }) {
     newProject({
       variables: {
         name: nameRef.current.value,
-        userId: user?.me.id,
       },
     });
     setOpenCreateProject(false);

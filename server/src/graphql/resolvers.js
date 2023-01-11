@@ -20,19 +20,39 @@ module.exports = {
         }
       );
     },
-    getProject: async (root, { projectId }, { models }) => {
+    getProject: async (root, { projectId }, { models, req }) => {
       const project = await models.Project.findByPk(projectId, {
-        include: [{ model: models.Task, as: "tasks" }],
+        include: [
+          { model: models.Task, as: "tasks" },
+          { model: models.User, as: "users" },
+        ],
       });
 
-      return project;
+      for (const user of project.users) {
+        if (user.id === req.session.userId) {
+          return {
+            project,
+          };
+        }
+      }
+
+      return {
+        errors: [
+          {
+            type: "Authorization",
+            message: "You do not have access to this project.",
+          },
+        ],
+      };
     },
     getProjectsByUserId: async (root, args, { req, models }) => {
-      const projects = await models.Project.findAll({
+      const projects = await models.User_Project.findAll({
         where: {
           userId: req.session.userId,
         },
+        include: [{ model: models.Project, as: "project" }],
       });
+
       return projects;
     },
     me: async (parent, args, { models, req }) => {
@@ -192,6 +212,7 @@ module.exports = {
       }
 
       req.session.userId = user.id;
+      console.log(req.session);
 
       return { user };
     },
@@ -210,9 +231,14 @@ module.exports = {
       });
     },
 
-    createProject: (parent, args, { models }) => {
+    createProject: async (parent, args, { models, req }) => {
       try {
-        return models.Project.create(args);
+        const user = await models.User.findByPk(req.session.userId);
+        console.log(req.session);
+        const project = await models.Project.create(args);
+
+        await user.addProject(project);
+        return project;
       } catch (err) {
         console.error(err);
       }
@@ -332,6 +358,14 @@ module.exports = {
           ],
         };
       }
+    },
+
+    acceptInvite: async (_, { inviteId }, { models }) => {
+      const invite = await models.Invitation.findByPk(inviteId);
+      const project = await models.Project.findByPk(invite.projectId);
+      const user = await models.User.findByPk(invite.inviteeId);
+
+      await project.addUser(user);
     },
   },
 };

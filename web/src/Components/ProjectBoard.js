@@ -40,10 +40,14 @@ function ProjectBoard({ user, userLoading }) {
     );
   }
 
-  if (project?.getProject.userId !== user?.me.id) {
+  if (project?.getProject.errors) {
     return (
       <div className="mt-8">
-        <h2 className="text-center">You do not have access to this project.</h2>
+        {project.getProject.errors.map((error, i) => (
+          <h2 key={i} className="text-center text-white">
+            {error.type}: {error.message}
+          </h2>
+        ))}
       </div>
     );
   }

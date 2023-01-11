@@ -17,7 +17,7 @@ function TaskInformation({
       {
         query: GET_PROJECT,
         variables: {
-          projectId: project?.getProject.id,
+          projectId: project?.getProject.project.id,
         },
       },
       "getProject",
@@ -51,10 +51,7 @@ function TaskInformation({
             />
           </div>
           <div className="flex space-x-2 items-center mt-4">
-            <p className="text-sm">
-              Status:
-              {/* <strong>{task.status}</strong> */}
-            </p>
+            <p className="text-sm">Status:</p>
             <EditTaskStatus
               task={task}
               project={project}

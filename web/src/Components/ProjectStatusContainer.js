@@ -7,7 +7,7 @@ function ProjectStatusContainer({
   setShowTaskInfo,
   setTaskShown,
 }) {
-  const tasks = project.getProject.tasks
+  const tasks = project.getProject.project.tasks
     .filter((task) => task.status === status)
     .sort((a, b) => Number(a.createdAt) - Number(b.createdAt));
 

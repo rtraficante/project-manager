@@ -14,7 +14,7 @@ function CreateTask({ project, setShowForm }) {
       {
         query: GET_PROJECT,
         variables: {
-          projectId: project?.getProject.id,
+          projectId: project?.getProject.project.id,
         },
       },
       "getProject",
@@ -30,7 +30,7 @@ function CreateTask({ project, setShowForm }) {
         name: nameRef.current.value,
         description: descriptionRef.current.value,
         due: d.getTime(),
-        projectId: project.getProject.id,
+        projectId: project.getProject.project.id,
       },
     });
     if (task) {

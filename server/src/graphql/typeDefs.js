@@ -15,8 +15,14 @@ module.exports = gql`
   type Project {
     id: Int!
     name: String
-    userId: Int
     tasks: [Task]
+    users: [User]
+  }
+
+  type UserProject {
+    id: Int!
+    project: Project
+    user: User
   }
 
   type Task {
@@ -55,12 +61,22 @@ module.exports = gql`
     status: Boolean!
   }
 
+  type GetProjectError {
+    type: String
+    message: String
+  }
+
+  type GetProjectResponse {
+    errors: [GetProjectError]
+    project: Project
+  }
+
   type Query {
     allUsers: [User]!
     getUser(email: String!): User!
-    getProject(projectId: Int!): Project!
+    getProject(projectId: Int!): GetProjectResponse!
     me: User
-    getProjectsByUserId: [Project]
+    getProjectsByUserId: [UserProject]
     getTasks(projectId: Int!): [Task!]
     getInvites: [Invitation]
   }
@@ -78,7 +94,7 @@ module.exports = gql`
 
     logout: Boolean!
 
-    createProject(name: String!, userId: Int!): Project!
+    createProject(name: String!): UserProject!
 
     deleteProject(id: Int!): Boolean!
 
@@ -100,5 +116,9 @@ module.exports = gql`
       senderId: Int!
       inviteeId: Int!
     ): InviteResponse!
+
+    acceptInvite(inviteId: Int!): Boolean!
+
+    declineInvite(inviteId: Int!): Boolean!
   }
 `;
