@@ -1,6 +1,9 @@
 # Project Management System
 
 ### To view this project, visit this [link](https://www.rt-projectmanager.com).
+
+![Project Screenshot](https://rt-media.s3.amazonaws.com/project-screenshots/proj-man-2.png)
+
 If you'd like access to a test account, use this information given below.
 
 
