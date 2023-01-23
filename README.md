@@ -2,7 +2,7 @@
 
 This application was created to allow users to stay more organized when building projects, planning chores, and many more.
 
-# Link To Project: (https://www.rt-projectmanager.com).
+### Link To Project: https://www.rt-projectmanager.com
 
 ![Project Screenshot](https://rt-media.s3.amazonaws.com/project-screenshots/proj-man-2.png)
 
