@@ -18,7 +18,7 @@ function Navbar() {
     <div className="h-14 flex justify-between bg-black px-2 md:px-8 items-center text-white border-b border-gray-600">
       <div>
         <button className="font-bold p-2 rounded hover:bg-blue-500 hover:bg-opacity-60">
-          <a href="/">Project Management</a>
+          <a href="/">taskform.</a>
         </button>
       </div>
       <div>
