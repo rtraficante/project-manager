@@ -10,7 +10,7 @@ function Login({
   return (
     <div className="mt-12 p-8 py-12 w-full max-w-[400px] bg-gray-800 text-white rounded shadow-md">
       <h4 className="text-center font-bold text-white mb-6">
-        Log in to Project Management
+        Log in to taskform.
       </h4>
       <form onSubmit={handleLogin} className="flex flex-col space-y-4">
         {loginData?.login.errors ? (
