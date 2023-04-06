@@ -31,6 +31,19 @@ function LoginPage() {
     }
   };
 
+  const handleDemoLogin = async () => {
+    const response = await loginUser({
+      variables: {
+        email: "demotest@demo.com",
+        password: "demotest",
+      },
+    }).then(() => client.resetStore());
+
+    if (response[0].data.me) {
+      navigate("/");
+    }
+  };
+
   const handleRegister = async (e) => {
     e.preventDefault();
     const response = await registerUser({
@@ -49,6 +62,14 @@ function LoginPage() {
 
   return (
     <div className="w-full flex flex-col items-center m-auto">
+      <div className="self-start m-4">
+        <button
+          onClick={handleDemoLogin}
+          className="bg-blue-800 font-medium text-white p-4 rounded-md shadow-md hover:bg-blue-600 hover:shadow-lg transition duration-150 ease-in-out"
+        >
+          Log into Demo Account
+        </button>
+      </div>
       <div className="mt-8">
         <h2 className="font-bold text-4xl text-white">taskform.</h2>
       </div>
